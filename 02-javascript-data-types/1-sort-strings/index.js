@@ -13,7 +13,7 @@ export function sortStrings(arr, param = "asc") {
     );
   }
   if (param === "desc") {
-    newArr.sort((a, b) => b.localeCompare(a));
+    newArr.sort((a, b) => b.localeCompare(a, ["ru", "en"]));
   }
 
   return newArr;
