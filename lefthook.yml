@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    check-code:
+      run: npm run quave-check
+    update-index:
+      run: git update-index --again
+
+
+pre-push:
+  commands:
+    tests:
+      run: npm test
+
