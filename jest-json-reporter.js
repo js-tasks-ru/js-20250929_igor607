@@ -5,7 +5,7 @@ function jsonReporter(report) {
     testCase.testResults.forEach((result) => {
       results.push({
         description: result.title,
-        success: result.status === 'passed',
+        success: result.status === "passed",
         suite: result.ancestorTitles,
         time: result.duration,
       });
@@ -23,8 +23,10 @@ function jsonReporter(report) {
   };
 
   if (ciReport.summary.failed) {
+    // eslint-disable-next-line no-console
     console.error(JSON.stringify(ciReport));
   } else {
+    // eslint-disable-next-line no-console
     console.log(JSON.stringify(ciReport));
   }
 

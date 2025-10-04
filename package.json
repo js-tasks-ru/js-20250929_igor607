@@ -4,10 +4,11 @@
   "description": "Repo with tasks for JS",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint \"./**/*.js\"",
-    "lint:fix": "eslint --fix \"./**/*.js\"",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest",
-    "test:specific": "cross-env NODE_ICU_DATA=node_modules/full-icu jest -t 'intro/sum'"
+    "test:specific": "cross-env NODE_ICU_DATA=node_modules/full-icu jest -t 'intro/sum'",
+    "quave-eslint": "eslint . --fix",
+    "quave-prettier": "prettier --write \"**/*.js\"",
+    "quave-check": "npm run quave-eslint && npm run quave-prettier"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,11 @@
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
   },
+  "eslintConfig": {
+    "extends": [
+      "@quave/quave"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -36,6 +42,8 @@
     "eslint-plugin-import": "^2.22.1",
     "full-icu": "^1.3.1",
     "jest": "25.5.4",
-    "jest-fetch-mock": "^3.0.3"
+    "jest-fetch-mock": "^3.0.3",
+    "lefthook": "^1.13.6",
+    "prettier": "^3.6.2"
   }
 }
