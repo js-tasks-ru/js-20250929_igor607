@@ -11,10 +11,10 @@ export function createGetter(path) {
 
     for (const part of parts) {
       if (current === undefined || current === null) {
-        return undefined;
+        return;
       }
       if (!Object.hasOwn(current, part)) {
-        return undefined;
+        return;
       }
       current = current[part];
     }

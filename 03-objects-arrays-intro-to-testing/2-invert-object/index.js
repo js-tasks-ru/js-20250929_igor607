@@ -7,7 +7,7 @@ export function invertObj(obj) {
   const result = {};
 
   if (obj === undefined) {
-    return undefined;
+    return;
   }
   if (obj === null || typeof obj !== "object") {
     return {};
