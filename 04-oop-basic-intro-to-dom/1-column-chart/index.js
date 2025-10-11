@@ -15,10 +15,10 @@ export default class ColumnChart {
     this.link = link;
     this.formatHeading = formatHeading;
 
-    this.render();
+    this.createElement();
   }
 
-  get template() {
+  createChartTemplate() {
     return `
 			<div class="column-chart ${this.data.length ? "" : "column-chart_loading"}" style="--chart-height: ${this.chartHeight}">
 				<div class="column-chart__title">
@@ -28,47 +28,44 @@ export default class ColumnChart {
 				<div class="column-chart__container">
 					<div class="column-chart__header">${this.formatHeading(this.value)}</div>
 					<div class="column-chart__chart">
-						${this.getColumnBody()}
+						${this.createChartBodyTemplate(this.data)}
 					</div>
 				</div>
 			</div>
 		`;
   }
 
-  getColumnBody(data = this.data) {
-    if (!data.length) {
+  createChartBodyTemplate(data) {
+    if (!data) {
       return "";
     }
     const maxValue = Math.max(...data);
     const scale = this.chartHeight / maxValue;
     return data
       .map((item) => {
-        const value = String(Math.floor(item * scale));
+        const value = Math.floor(item * scale);
         const tooltip = ((item / maxValue) * 100).toFixed(0) + "%";
         return `<div style="--value: ${value}" data-tooltip="${tooltip}"></div>`;
       })
       .join("");
   }
 
-  render() {
+  createElement() {
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = this.template;
+    wrapper.innerHTML = this.createChartTemplate();
     this.element = wrapper.firstElementChild;
   }
 
-  update(newData = []) {
+  update(newData) {
     this.data = newData;
-    if (!this.data.length) {
-      this.element.classList.add("column-chart_loading");
-    } else {
-      this.element.classList.remove("column-chart_loading");
+    const body = document.querySelector('[data-element="body"]');
+    if (body) {
+      body.innerHTML = this.createChartBodyTemplate();
     }
   }
 
   remove() {
-    if (this.element) {
-      this.element.remove();
-    }
+    this.element.remove();
   }
 
   destroy() {
