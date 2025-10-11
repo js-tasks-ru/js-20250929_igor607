@@ -6,6 +6,7 @@
   "scripts": {
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest",
     "test:specific": "cross-env NODE_ICU_DATA=node_modules/full-icu jest -t 'intro/sum'",
+    "test:watch": "yarn test --watch",
     "quave-eslint": "eslint . --fix",
     "quave-prettier": "prettier --write \"**/*.js\"",
     "quave-check": "npm run quave-eslint && npm run quave-prettier"
