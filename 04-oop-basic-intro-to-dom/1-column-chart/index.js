@@ -58,7 +58,7 @@ export default class ColumnChart {
 
   update(newData) {
     this.data = newData;
-    const body = document.querySelector('[data-element="body"]');
+    const body = this.element.querySelector('[data-element="body"]');
     if (body) {
       body.innerHTML = this.createChartBodyTemplate();
     }
