@@ -26,8 +26,8 @@ export default class ColumnChart {
 					${this.link ? `<a href="${this.link}" class="column-chart__link">View all</a>` : ""}
 				</div>
 				<div class="column-chart__container">
-					<div class="column-chart__header">${this.formatHeading(this.value)}</div>
-					<div class="column-chart__chart">
+					<div data-element="header" class="column-chart__header">${this.formatHeading(this.value)}</div>
+ 					<div data-element="body" class="column-chart__chart">
 						${this.createChartBodyTemplate(this.data)}
 					</div>
 				</div>
@@ -36,9 +36,6 @@ export default class ColumnChart {
   }
 
   createChartBodyTemplate(data) {
-    if (!data) {
-      return "";
-    }
     const maxValue = Math.max(...data);
     const scale = this.chartHeight / maxValue;
     return data
@@ -59,9 +56,7 @@ export default class ColumnChart {
   update(newData) {
     this.data = newData;
     const body = this.element.querySelector('[data-element="body"]');
-    if (body) {
-      body.innerHTML = this.createChartBodyTemplate();
-    }
+    body.innerHTML = this.createChartBodyTemplate(newData);
   }
 
   remove() {
