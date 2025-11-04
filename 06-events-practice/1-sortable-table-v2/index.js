@@ -4,12 +4,13 @@ export default class SortableTableV2 extends SortableTableV1 {
   arrowElement;
 
   constructor(headerConfig = [], options = {}) {
-    const { data = [], sorted = {} } = options;
+    const { data = [], sorted = {}, isSortLocally = true } = options;
 
     super(headerConfig, data);
-
+    this.isSortLocally = isSortLocally;
     this.headerConfig = headerConfig;
     this.data = data;
+
     this.sorted = sorted;
     this.isSortLocally = true;
 
@@ -64,9 +65,11 @@ export default class SortableTableV2 extends SortableTableV1 {
     if (this.isSortLocally) {
       this.sortOnClient(sortField, sortOrder);
     } else {
-      this.sortOnServer();
+      this.sortOnServer(sortField, sortOrder);
     }
   }
+
+  sortOnServer(field, order) {}
 
   createListeners() {
     this.subElements.header.addEventListener(
