@@ -62,6 +62,7 @@ export default class SortableTable extends SortableTableV2 {
   }
 
   createListeners() {
+    this.onWindowScroll = this.onWindowScroll.bind(this);
     super.createListeners();
     window.addEventListener("scroll", this.onWindowScroll);
   }
@@ -102,7 +103,7 @@ export default class SortableTable extends SortableTableV2 {
     }
   }
 
-  onWindowScroll = async () => {
+  async onWindowScroll() {
     try {
       const { bottom } = this.element.getBoundingClientRect();
       const { id, order } = this.sorted;
@@ -123,7 +124,7 @@ export default class SortableTable extends SortableTableV2 {
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  };
+  }
 
   destroy() {
     super.destroy();
