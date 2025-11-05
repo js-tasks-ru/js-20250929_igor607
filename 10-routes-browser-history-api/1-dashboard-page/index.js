@@ -129,11 +129,24 @@ export default class Page {
     this.rangePicker.element.addEventListener("date-select", this.onDateSelect);
   }
 
-  destroy() {
-    this.remove();
+  destroyComponents() {
+    Object.values(this.element).forEach((component) => component.destroy());
+  }
+
+  destroyListeners() {
+    this.rangePicker.element.removeEventListener(
+      "date-select",
+      this.onDateSelect,
+    );
   }
 
   remove() {
     this.element.remove();
+  }
+
+  destroy() {
+    this.destroyComponents();
+    this.destroyListeners();
+    this.remove();
   }
 }
